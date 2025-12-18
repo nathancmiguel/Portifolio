@@ -48,8 +48,8 @@ function scrollToSection(id: string) {
 </script>
 
 <template>
-    <nav :style="{ height: showMobileMenu ? '156px' : '68px' }">
-        <div class="w-full flex">
+    <nav>
+        <div class="w-full max-w-5xl flex">
             <div class="nav-links">
                 <input type="checkbox" id="navmenu" class="navmenu-input" v-model="showMobileMenu" />
                 <label for="navmenu">
@@ -102,7 +102,7 @@ function scrollToSection(id: string) {
                 </label>
             </div>
         </div>
-        <div class="nav-mobile-links" v-if="showMobileMenu">
+        <div :class="[showMobileMenu ? 'h-23 mt-4 opacity-100' : 'h-0 mt-0 opacity-0', 'nav-mobile-links']">
             <a @click="scrollToSection('about')">{{ t("nav.home") }}</a>
             <a @click="scrollToSection('projects')">{{ t("nav.projects") }}</a>
         </div>

@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .card-section {
-    @apply  min-h-[calc(100vh-68px)]  py-4 flex flex-col items-center justify-center;
+    @apply  min-h-[calc(100vh-76px)] mt-[76px] py-4 flex flex-col items-center justify-center;
     box-sizing: border-box;
 }
 
