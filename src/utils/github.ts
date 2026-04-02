@@ -31,7 +31,7 @@ export async function fetchPinnedRepos(): Promise<Repository[]> {
         const controller = new AbortController()
         const timeout = setTimeout(function() { controller.abort() }, 10000);
 
-        const response = await fetch('https://api.kremilly.com/github?user=Cesio137', {
+        const response = await fetch('https://api.kremilly.com/github?user=nathancmiguel', {
             signal: controller.signal
         })
 

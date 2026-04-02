@@ -80,7 +80,7 @@ const { t } = useI18n();
                         </div>
                     </div>
                 </a>
-                <a target="_blank" href="https://github.com/Cesio137">
+                <a target="_blank" href="https://github.com/nathancmiguel">
                     <div>
                         <h5>
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
