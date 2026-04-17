@@ -165,7 +165,7 @@ const { t } = useI18n();
                     </svg>
                     <div />
                 </a>
-                <a target="_blank" href="https://www.linkedin.com/in/nathan-miguel-488b462b1/">
+                <a target="_blank" href="https://www.linkedin.com/in/nathancmiguel/">
                     <svg data-v-5fb5722d="" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="lucide lucide-linkedin-icon lucide-linkedin w-6 h-5"
