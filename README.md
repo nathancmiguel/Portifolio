@@ -1,5 +1,58 @@
-# Vue 3 + TypeScript + Vite
+# Labpoint Frontend
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Labpoint é um sistema de agendamento de laboratórios, criado em primeiro momento para a instituição do SENAI com o intuito de organizar melhor a disposição das aulas na unidade e ajudar os professores a organizar e planejar os dias de acordo com a necessidade da disciplina. O frontend concentra recursos para o desenvolvimento funcional do sistema.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Setup
+
+Instale as dependencias:
+
+```bash
+# npm
+npm install
+
+# bun
+bun install
+```
+
+## Desenvolvimento
+
+Inicie o servidor de desenvolvimento em `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
+
+# bun
+bun run dev
+```
+
+## Produção
+
+Faça o build da aplicação para produção:
+
+```bash
+# npm
+npm run build
+
+# bun
+bun run build
+```
+
+Pré-visualize o build de produção localmente:
+
+```bash
+# npm
+npm run preview
+
+# bun
+bun run preview
+```
+
+## Tecnologias
+
+- [Nuxt](https://nuxt.com/)
+- [Nuxt UI](https://ui.nuxt.com/)
+- [VueJs](https://vuejs.org/)
+- [VueUse](https://vueuse.org/)
+- [Lucide Icons](https://lucide.dev/)
+- [Better-auth](https://better-auth.com/)

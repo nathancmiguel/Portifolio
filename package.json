@@ -1,29 +1,29 @@
 {
-  "name": "portifolio",
-  "private": true,
-  "version": "0.0.0",
+  "name": "labpoint",
   "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "dev:host": "nuxt dev --host",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@headlessui/vue": "latest",
+    "@internationalized/date": "latest",
+    "@nuxt/fonts": "latest",
+    "@nuxt/icon": "latest",
+    "@nuxt/ui": "latest",
+    "@nuxtjs/color-mode": "latest",
+    "@nuxtjs/i18n": "latest",
     "@tailwindcss/vite": "latest",
     "@vueuse/core": "latest",
-    "lucide-vue-next": "latest",
+    "nuxt": "latest",
+    "nuxt-typed-router": "latest",
     "tailwindcss": "latest",
     "vue": "latest",
-    "vue-i18n": "latest",
-    "vue-router": "latest"
-  },
-  "devDependencies": {
-    "@types/node": "^24.10.9",
-    "@vitejs/plugin-vue": "latest",
-    "@vue/tsconfig": "latest",
-    "typescript": "latest",
-    "vite": "latest",
-    "vue-tsc": "latest"
+    "vue-router": "latest",
+    "zod": "latest"
   }
 }

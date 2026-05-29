@@ -1,0 +1,17 @@
+{
+    "stack": "Developer",
+    "locale": "locality",
+    "languages": "languages",
+    "contact-me": "contact-me",
+    "about": "Hi, I'm a developer with a strong focus on backend and low-level programming. I’m passionate about exploring new technologies, especially in the field of computer graphics.",
+
+    "my-projects": "My Projects",
+    "runa-desc": "A low-level project for a graphics engine built in Vulkan and DirectX.",
+    "lab-desc": "Website for managing SENAI laboratory reservations using the Spring Boot, Nuxt, and PostgreSQL stacks.",
+    "bang-desc": "A smart Discord bot built with Tanstack Start, ASP.NET, and PostgreSQL.",
+    "ip-desc": "A library for C++ and Unreal Engine that abstracts non-boost ASIO functions for use with UDP, TCP, HTTP, and WS protocols.",
+    "discloud-desc": "🦀 A Rust wrapper for Discloud's API.",
+    "eus-desc": "Plugin for Unreal Engine that allows you to customize various settings and features of the engine in game.",
+
+    "contacts": "Contacts"
+}
