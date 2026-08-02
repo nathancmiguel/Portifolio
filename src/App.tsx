@@ -1,14 +1,6 @@
-/*
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-*/
 import { useEffect } from 'react'
 import Hero from './components/Hero'
 import './App.css'
-import { Separator } from './components/ui/separator'
-import { Terminal } from 'lucide-react'
 import Logs from './components/Logs'
 import { useIntlayer, useLocale } from 'react-intlayer'
 

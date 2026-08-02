@@ -1,14 +1,8 @@
-import { Languages, Menu, Moon, Sun, X } from "lucide-react";
+import { Languages, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-import { useState } from "react";
 import { useTheme } from "@/hooks/use-theme";
-import { useIntlayer, useLocale } from "react-intlayer";
-
-type MenuItem = {
-    label: string;
-    href: string;
-};
+import { useLocale } from "react-intlayer";
 
 export default function Navbar() {
     const locale = useLocale();

@@ -10,7 +10,6 @@ import {
 } from "./ui/card";
 import { PiPulse } from "react-icons/pi";
 import { GitHubCalendar } from "react-github-calendar";
-import { Separator } from "./ui/separator";
 import { selectLastHalfYear } from "@/utils/github";
 
 type GitHubContribution = {
