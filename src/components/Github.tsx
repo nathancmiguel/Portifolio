@@ -108,7 +108,7 @@ export default function Github() {
         <CardTitle>
           <div className="flex items-center gap-x-2">
             <PiPulse className="h-4 w-4 fill-yellow-500" />
-            <span className="text-[12px] font-bold tracking-[0.2em] text-yellow-500">
+            <span className="text-[12px] text-left font-bold tracking-[0.2em] text-yellow-500">
               {githubContent.title}
             </span>
           </div>

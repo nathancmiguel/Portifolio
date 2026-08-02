@@ -10,7 +10,7 @@ export default function Logs() {
         <section className="flex flex-col gap-y-1">
             <div className="flex gap-x-2 items-center px-4">
                 <Terminal className="w-4 h-4 stroke-yellow-500 animate-pulse" />
-                <h2 className="font-bold text-[16px] text-yellow-500">{logsContent.dev_log.value}</h2>
+                <h2 className="font-bold text-[12px] text-left text-yellow-500">{logsContent.dev_log.value}</h2>
             </div>
 
             <Separator orientation="horizontal" />
