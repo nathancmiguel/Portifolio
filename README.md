@@ -1,58 +1,75 @@
-# Labpoint Frontend
+# React + TypeScript + Vite
 
-Labpoint é um sistema de agendamento de laboratórios, criado em primeiro momento para a instituição do SENAI com o intuito de organizar melhor a disposição das aulas na unidade e ajudar os professores a organizar e planejar os dias de acordo com a necessidade da disciplina. O frontend concentra recursos para o desenvolvimento funcional do sistema.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Setup
+Currently, two official plugins are available:
 
-Instale as dependencias:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-```bash
-# npm
-npm install
+## React Compiler
 
-# bun
-bun install
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
 ```
 
-## Desenvolvimento
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Inicie o servidor de desenvolvimento em `http://localhost:3000`:
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-```bash
-# npm
-npm run dev
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 
-# bun
-bun run dev
 ```
-
-## Produção
-
-Faça o build da aplicação para produção:
-
-```bash
-# npm
-npm run build
-
-# bun
-bun run build
-```
-
-Pré-visualize o build de produção localmente:
-
-```bash
-# npm
-npm run preview
-
-# bun
-bun run preview
-```
-
-## Tecnologias
-
-- [Nuxt](https://nuxt.com/)
-- [Nuxt UI](https://ui.nuxt.com/)
-- [VueJs](https://vuejs.org/)
-- [VueUse](https://vueuse.org/)
-- [Lucide Icons](https://lucide.dev/)
-- [Better-auth](https://better-auth.com/)
