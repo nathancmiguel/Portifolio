@@ -62,7 +62,7 @@ export default function Projects() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4 py-3">
-          {projectsContent.list.map((project) => (
+          {projectsContent.list.map((project: any) => (
             <button
               key={project.id.value}
               onClick={() => setSelectedProject(project)}
@@ -73,7 +73,7 @@ export default function Projects() {
                   {project.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
+                  {project.tags.map((tag: any) => (
                     <Badge
                       key={tag.value}
                       variant="outline"
