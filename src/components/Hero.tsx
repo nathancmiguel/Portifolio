@@ -30,19 +30,19 @@ export default function Hero() {
     const contactLinks: ContactLink[] = [
         {
             label: "YouTube",
-            href: "https://youtube.com",
+            href: "https://youtube.com/@NathanMiguel1",
             icon: <FaYoutube />,
             description: cardContent.youtube,
         },
         {
             label: "GitHub",
-            href: "https://github.com",
+            href: "https://github.com/nathancmiguel",
             icon: <FaGithub />,
             description: cardContent.github,
         },
         {
             label: "LinkedIn",
-            href: "https://linkedin.com",
+            href: "https://www.linkedin.com/in/nathancmiguel/",
             icon: <FaLinkedin />,
             description: cardContent.linkedin,
         },
@@ -58,11 +58,11 @@ export default function Hero() {
             icon: <FaDiscord />,
         },
         {
-            href: "https://instagram.com/nathancmiguel",
+            href: "https://instagram.com/nathan_cmiguel",
             icon: <FaInstagram />,
         },
         {
-            href: "https://twitter.com/nathancmiguel",
+            href: "https://x.com/nathancmig",
             icon: <FaTwitter />,
         },
     ];
