@@ -123,7 +123,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground bg-radial-[at_top] from-white dark:from-[color-mix(in_oklab,var(--color-yellow-500),black_75%)] to-neutral-200 dark:to-[color-mix(in_oklab,var(--color-yellow-500),black_90%)];
+    @apply bg-background text-foreground bg-radial-[at_top] from-white dark:from-[color-mix(in_oklab,var(--color-yellow-500),black_78%)] to-neutral-200 dark:to-[color-mix(in_oklab,var(--color-yellow-500),black_90%)];
     background-attachment: fixed;
   }
   button:not(:disabled), [role="button"]:not(:disabled) {
