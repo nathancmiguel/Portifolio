@@ -2,6 +2,7 @@ import { t, type Dictionary } from "intlayer";
 
 const appContent = {
   key: "app",
+  schema: undefined,
   content: {
     title: t({
       en: "Nathan Miguel | Software Development",

@@ -44,17 +44,17 @@ const projectsContent = {
         id: "runa-engine",
         title: "Runa Engine",
         shortDescription: t({
-          en: "A low-level project for a graphics engine built in WebGPU.",
-          "pt-BR": "Um projeto de baixo nível para uma engine gráfica construída em WebGPU."
+          en: "A low-level project for a graphics engine built in NRI(NVidia Hardware Interface).",
+          "pt-BR": "Um projeto de baixo nível para uma engine gráfica construída em NRI(NVidia Hardware Interface)."
         }),
-        tags: ["C++", "SDL3", "WebGPU(dawn)", "WGSL"],
+        tags: ["C++", "SDL3", "NRI(NVidia Hardware Interface)", "HLSL"],
         overview: t({
           en: "A low-level project for a graphics engine for real-time rendering using C++.",
           "pt-BR": "Um projeto de baixo nível para uma engine gráfica focada em renderização em tempo real usando C++."
         }),
         architectureDetails: t({
-          en: "The project uses C++ and SDL3 for window management and input handling with WebGPU(dawn) for graphics rendering.",
-          "pt-BR": "O projeto usa C++ e SDL3 para gerenciamento de janelas e inputs, junto com WebGPU(dawn) para renderização."
+          en: "The project uses C++ and SDL3 for window management and input handling with NRI(NVidia Hardware Interface) for graphics rendering.",
+          "pt-BR": "O projeto usa C++ e SDL3 para gerenciamento de janelas e inputs, junto com NRI(NVidia Hardware Interface) para renderização."
         }),
         databaseDetails: t({
           en: "No database used in this project.",
@@ -94,6 +94,7 @@ const projectsContent = {
       }
     ]
   },
+  schema: undefined
 } satisfies Dictionary;
 
 export default projectsContent;

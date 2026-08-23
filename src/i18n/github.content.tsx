@@ -2,6 +2,7 @@ import { t, type Dictionary } from 'intlayer';
 
 const githubContent = {
   key: 'github',
+  schema: undefined,
   content: {
     title: t({
       en: 'GITHUB CONTRIBUTION GRAPH',

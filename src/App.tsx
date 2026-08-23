@@ -35,6 +35,17 @@ function App() {
     if (ogDescription) {
       ogDescription.setAttribute('content', appContent.description.value);
     }
+    
+    // Atualiza a meta do Twitter
+    let twitterTitle = document.querySelector('meta[property="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', appContent.title.value);
+    }
+    
+    let twitterDescription = document.querySelector('meta[property="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', appContent.description.value);
+    }
   }, [appContent.title.value, appContent.description.value, locale]);
 
   return (

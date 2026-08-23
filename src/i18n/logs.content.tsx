@@ -2,6 +2,7 @@ import { t, type Dictionary } from 'intlayer';
 
 const logsContent = {
   key: 'logs',
+  schema: undefined,
   content: {
     dev_log: t({
         en: {
@@ -13,7 +14,6 @@ const logsContent = {
     }),
     
   },
-  schema: undefined,
 } satisfies Dictionary;
 
 export default logsContent;

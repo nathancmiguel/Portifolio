@@ -2,6 +2,7 @@ import { t, type Dictionary } from 'intlayer';
 
 const cardContent = {
   key: 'card',
+  schema: undefined,
   content: {
     developer: t({
       en: 'Developer',
@@ -12,8 +13,8 @@ const cardContent = {
       "pt-BR": 'Brasil, Anápolis, Goiás',
     }),
     description: t({
-      en: 'Software Developer focused on creating efficient and scalable digital products. Specialized in building resilient APIs, data modeling, and high-performance graphics programming with WebGPU.',
-      "pt-BR": 'Desenvolvedor de Software voltado para a criação de produtos digitais eficientes e escaláveis. Especializado na construção de APIs resilientes, modelagem de dados e programação gráfica de alta performance com WebGPU.',
+      en: 'Software Developer focused on creating efficient and scalable digital products. Specialized in building resilient APIs, data modeling, and high-performance graphics programming.',
+      "pt-BR": 'Desenvolvedor de Software voltado para a criação de produtos digitais eficientes e escaláveis. Especializado na construção de APIs resilientes, modelagem de dados e programação gráfica de alta performance.',
     }),
     youtube: t({
       en: 'Programming and role-play channel',
@@ -27,7 +28,7 @@ const cardContent = {
       en: 'Connect with me on LinkedIn',
       "pt-BR": 'Conecte-se comigo no LinkedIn',
     }),
-  },
+  }
 } satisfies Dictionary;
 
 export default cardContent;
