@@ -18,10 +18,10 @@ const projectsContent = {
         id: "labpoint-website",
         title: "Labpoint",
         shortDescription: t({
-          en: "Website for managing SENAI laboratory reservations using the Spring Boot, Nuxt, and PostgreSQL stacks.",
-          "pt-BR": "Site para gerenciar reservas de laboratório do SENAI usando as stacks Spring Boot, Nuxt e PostgreSQL."
+          en: "Website for managing SENAI laboratory reservations using the Spring Boot, Tanstack Start, and PostgreSQL stacks.",
+          "pt-BR": "Site para gerenciar reservas de laboratório do SENAI usando as stacks Spring Boot, Tanstack Start e PostgreSQL."
         }),
-        tags: ["Java 25", "Spring Boot 4", "Postgresql", "Nuxt 4"],
+        tags: ["Java 25", "Spring Boot 4", "Postgresql", "Tanstack Start"],
         overview: t({
           en: "Website for managing SENAI laboratory reservations.",
           "pt-BR": "Site para gerenciar reservas de laboratório do SENAI."
