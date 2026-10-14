@@ -18,17 +18,17 @@ const projectsContent = {
         id: "labpoint-website",
         title: "Labpoint",
         shortDescription: t({
-          en: "Website for managing SENAI laboratory reservations using the Spring Boot, Tanstack Start, and PostgreSQL stacks.",
-          "pt-BR": "Site para gerenciar reservas de laboratório do SENAI usando as stacks Spring Boot, Tanstack Start e PostgreSQL."
+          en: "Website for managing SENAI laboratory reservations using the ASP.NET, Tanstack Start, and PostgreSQL stacks.",
+          "pt-BR": "Site para gerenciar reservas de laboratório do SENAI usando as stacks ASP.NET, Tanstack Start e PostgreSQL."
         }),
-        tags: ["Java 25", "Spring Boot 4", "Postgresql", "Tanstack Start"],
+        tags: ["C#", "ASP.NET", "Postgresql", "Tanstack Start"],
         overview: t({
           en: "Website for managing SENAI laboratory reservations.",
           "pt-BR": "Site para gerenciar reservas de laboratório do SENAI."
         }),
         architectureDetails: t({
-          en: "Spring Boot API Gateway for authentication, authorization, and request routing.",
-          "pt-BR": "Spring Boot API Gateway para autenticação, autorização e roteamento de requisições."
+          en: "ASP.NET Gateway for authentication, authorization, and request routing.",
+          "pt-BR": "ASP.NET Gateway para autenticação, autorização e roteamento de requisições."
         }),
         databaseDetails: t({
           en: "PostgreSQL for data persistence and schema design following the Entity–Attribute–Value (EAV) model.",
