@@ -11,6 +11,8 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useIntlayer } from "react-intlayer";
+import type { CSSProperties } from "react";
+import { HudFrame } from "./ui/hud-frame";
 
 type ContactLink = {
     label: string;
@@ -69,8 +71,19 @@ export default function Hero() {
 
     return (
         <header className="card-header">
-            <Card className="card-hero">
+            <HudFrame label="// SYS.PROFILE" className="w-full max-w-125">
+            <Card className="card-hero hud-card paper-card">
                 <CardHeader>
+                    <p
+                        aria-hidden
+                        className="mb-2 flex items-center font-mono text-[11px] text-hud dark:text-hud/80 text-left"
+                    >
+                        <span className="text-neutral-400 dark:text-neutral-500 mr-1">~$</span>
+                        <span className="boot-line" style={{ "--chars": 6 } as CSSProperties}>
+                            whoami
+                        </span>
+                        <span className="cursor-block" />
+                    </p>
                     <CardTitle className="flex items-center justify-start gap-4">
                         <div className="flex items-center justify-center">
                             <img
@@ -90,7 +103,7 @@ export default function Hero() {
                     </CardTitle>
                     <CardDescription className="flex flex-col py-2 items-start justify-center gap-2">
                         <div className="flex gap-x-2 items-center">
-                            <MapPin className="w-4 h-4 stroke-yellow-500" />
+                            <MapPin className="w-4 h-4 stroke-hud" />
                             <span className="text-sm text-neutral-600 dark:text-neutral-400">
                                 {cardContent.location}
                             </span>
@@ -108,7 +121,7 @@ export default function Hero() {
                             key={link.label}
                             variant="outline"
                             nativeButton={false}
-                            className="w-full flex flex-col items-start justify-center px-4 py-8 max-[345px]:py-10 shadow-md"
+                            className="w-full flex flex-col items-start justify-center px-4 py-8 max-[345px]:py-10 bg-paper border-ink/15 hover:border-ink/40 shadow-none dark:shadow-md"
                             render={
                                 <a
                                     href={link.href}
@@ -149,6 +162,7 @@ export default function Hero() {
                     ))}
                 </CardFooter>
             </Card>
+            </HudFrame>
         </header>
     );
 }

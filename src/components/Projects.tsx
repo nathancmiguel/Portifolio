@@ -19,6 +19,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useIntlayer } from "react-intlayer";
+import { HudFrame } from "./ui/hud-frame";
 
 // ==========================================
 // 1. Defina seus projetos aqui
@@ -44,12 +45,13 @@ export default function Projects() {
 
   return (
     <>
-      <Card className="w-full bg-neutral-100 dark:bg-transparent dark:backdrop-blur-2xl shadow-lg shadow-black/10 dark:shadow-yellow-700/10 rounded-xl">
+      <HudFrame label="// SYS.CASES" className="w-full">
+      <Card className="hud-card paper-card w-full h-full dark:bg-transparent dark:backdrop-blur-2xl rounded-xl">
         <CardHeader className="border-b dark:border-white/10">
           <CardTitle>
             <div className="flex items-center gap-x-2">
-              <Code2 className="h-4 w-4 text-yellow-500" />
-              <span className="text-[12px] text-left font-bold tracking-[0.2em] text-yellow-500 uppercase">
+              <Code2 className="h-4 w-4 text-hud" />
+              <span className="text-[12px] text-left font-bold tracking-[0.2em] text-hud uppercase">
                 {projectsContent.title}
               </span>
             </div>
@@ -66,10 +68,10 @@ export default function Projects() {
             <button
               key={project.id.value}
               onClick={() => setSelectedProject(project)}
-              className="group flex items-center justify-between p-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/20 hover:bg-white dark:hover:bg-white/5 transition-all text-left"
+              className="group flex items-center justify-between p-4 rounded-xl border border-ink/15 dark:border-white/10 bg-paper dark:bg-black/20 hover:bg-paper-card hover:border-ink/40 dark:hover:bg-white/5 transition-all text-left"
             >
               <div className="flex flex-col gap-3">
-                <h3 className="font-bold text-[16px] text-neutral-800 dark:text-neutral-200 group-hover:text-yellow-500 transition-colors font-mono">
+                <h3 className="font-bold text-[16px] text-neutral-800 dark:text-neutral-200 group-hover:text-hud transition-colors font-mono">
                   {project.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -84,13 +86,13 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-              <ArrowRight className="h-5 w-5 text-neutral-400 group-hover:text-yellow-500 transition-colors group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 text-neutral-400 group-hover:text-hud transition-colors group-hover:translate-x-1" />
             </button>
           ))}
         </CardContent>
 
         <div className="px-4">
-          <Separator className="dark:bg-white/10" />
+          <Separator className="bg-ink/15 dark:bg-white/10" />
         </div>
 
         <CardFooter className="py-4 flex justify-between items-center bg-transparent border-none">
@@ -100,6 +102,7 @@ export default function Projects() {
           <span className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono"></span>
         </CardFooter>
       </Card>
+      </HudFrame>
 
       <Sheet
         open={!!selectedProject}
@@ -109,9 +112,9 @@ export default function Projects() {
           {selectedProject && (
             <>
               {/* Sidebar Header */}
-              <SheetHeader className="p-6 border-b dark:border-white/10 sticky top-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md z-10 text-left">
+              <SheetHeader className="p-6 border-b dark:border-white/10 sticky top-0 bg-paper-card/90 dark:bg-neutral-950/80 backdrop-blur-md z-10 text-left">
                 <SheetTitle className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-yellow-500 text-sm font-mono tracking-wider">
+                  <div className="flex items-center gap-2 text-hud text-sm font-mono tracking-wider">
                     <Code2 className="h-4 w-4" /> // CASE_STUDY
                   </div>
                 </SheetTitle>
@@ -131,7 +134,7 @@ export default function Projects() {
                 <div className="flex flex-col gap-6">
                   {/* System Overview */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-yellow-500 font-bold text-xs tracking-widest uppercase">
+                    <div className="flex items-center gap-2 text-hud font-bold text-xs tracking-widest uppercase">
                       <Layers className="h-4 w-4" /> {projectsContent.systemOverview}
                     </div>
                     <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
@@ -141,7 +144,7 @@ export default function Projects() {
 
                   {/* Architecture & Routing */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-yellow-500 font-bold text-xs tracking-widest uppercase">
+                    <div className="flex items-center gap-2 text-hud font-bold text-xs tracking-widest uppercase">
                       <Activity className="h-4 w-4" /> {projectsContent.architecture}
                     </div>
                     <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
@@ -151,7 +154,7 @@ export default function Projects() {
 
                   {/* Database & Queues */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-yellow-500 font-bold text-xs tracking-widest uppercase">
+                    <div className="flex items-center gap-2 text-hud font-bold text-xs tracking-widest uppercase">
                       <Database className="h-4 w-4" /> {projectsContent.database}
                     </div>
                     <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
@@ -160,11 +163,11 @@ export default function Projects() {
                   </div>
 
                   {/* Engineering Metric Highlight */}
-                  <div className="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20">
-                    <div className="flex items-center gap-2 text-yellow-600 dark:text-yellow-500 font-bold text-xs tracking-widest uppercase mb-2">
+                  <div className="p-4 rounded-xl bg-amber-50 dark:bg-yellow-500/10 border border-amber-300 dark:border-yellow-500/20">
+                    <div className="flex items-center gap-2 text-hud font-bold text-xs tracking-widest uppercase mb-2">
                       <Activity className="h-4 w-4" /> {projectsContent.metric}
                     </div>
-                    <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                    <p className="text-sm font-medium text-amber-900 dark:text-yellow-200">
                       {selectedProject.metricDetails}
                     </p>
                   </div>
@@ -190,13 +193,13 @@ export default function Projects() {
               </div>
 
               {/* Sidebar Footer */}
-              <div className="p-6 border-t dark:border-white/10 mt-auto flex items-center justify-between bg-neutral-50 dark:bg-white/5">
+              <div className="p-6 border-t dark:border-white/10 mt-auto flex items-center justify-between bg-paper dark:bg-white/5">
                 {selectedProject.link?.value ? (
                   <a
                     href={selectedProject.link.value}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-yellow-500 hover:text-yellow-600 transition-colors"
+                    className="flex items-center gap-2 text-sm font-bold text-hud hover:opacity-80 transition-colors"
                   >
                     <ExternalLink className="h-4 w-4" /> {projectsContent.accessSystem}
                   </a>
