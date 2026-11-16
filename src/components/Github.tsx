@@ -11,6 +11,8 @@ import {
 import { PiPulse } from "react-icons/pi";
 import { GitHubCalendar } from "react-github-calendar";
 import { selectLastHalfYear } from "@/utils/github";
+import { HudFrame } from "./ui/hud-frame";
+import { useCountUp } from "@/hooks/use-count-up";
 
 type GitHubContribution = {
   date: string;
@@ -102,13 +104,17 @@ export default function Github() {
     };
   }, []);
 
+  const totalCount = useCountUp(stats.totalCount, !stats.isLoading, 1200);
+  const streak = useCountUp(stats.streak, !stats.isLoading);
+
   return (
-    <Card className="w-full bg-neutral-100 dark:bg-transparent dark:backdrop-blur-2xl shadow-lg shadow-black/10 dark:shadow-yellow-700/10">
+    <HudFrame label="// SYS.ACTIVITY" className="w-full">
+    <Card className="hud-card paper-card w-full h-full dark:bg-transparent dark:backdrop-blur-2xl">
       <CardHeader className="border-b">
         <CardTitle>
           <div className="flex items-center gap-x-2">
-            <PiPulse className="h-4 w-4 fill-yellow-500" />
-            <span className="text-[12px] text-left font-bold tracking-[0.2em] text-yellow-500">
+            <PiPulse className="h-4 w-4 fill-hud" />
+            <span className="text-[12px] text-left font-bold tracking-[0.2em] text-hud">
               {githubContent.title}
             </span>
           </div>
@@ -118,7 +124,7 @@ export default function Github() {
             href="https://github.com/nathancmiguel"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[12px] text-yellow-500 hover:underline underline-offset-3"
+            className="text-[12px] text-hud hover:underline underline-offset-3"
           >
             @nathancmiguel
           </a>
@@ -131,7 +137,7 @@ export default function Github() {
           transformData={selectLastHalfYear}
           colorScheme={theme}
           theme={{
-            light: ['transparent', '#fef08a', '#facc15', '#eab308', '#ca8a04'],
+            light: ['transparent', '#fde68a', '#fbbf24', '#d97706', '#92400e'],
             dark: ['transparent', '#fef08a', '#facc15', '#eab308', '#ca8a04'],
           }}
           blockSize={12}
@@ -152,27 +158,28 @@ export default function Github() {
         />
 
         <div className="w-full flex gap-x-4">
-          <div className="w-full flex flex-col items-start px-4 py-3 bg-neutral-100 dark:bg-black/10 outline outline-black/10 dark:outline-yellow-400/15">
+          <div className="w-full flex flex-col items-start px-4 py-3 bg-paper dark:bg-black/10 outline outline-ink/15 dark:outline-yellow-400/15">
             <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-600 dark:text-neutral-400">
               {githubContent.lastYear}
             </p>
-            <p className="mt-1 text-[18px] font-bold leading-none text-yellow-500">
+            <p className="mt-1 text-[18px] font-bold leading-none text-hud">
               {stats.isLoading
                 ? "..."
-                : `${stats.totalCount.toLocaleString("pt-BR")} ${githubContent.commits}`}
+                : `${totalCount.toLocaleString("pt-BR")} ${githubContent.commits}`}
             </p>
           </div>
 
-          <div className="w-full flex flex-col items-start px-4 py-3 bg-neutral-100 dark:bg-black/10 outline outline-black/10 dark:outline-yellow-400/15">
+          <div className="w-full flex flex-col items-start px-4 py-3 bg-paper dark:bg-black/10 outline outline-ink/15 dark:outline-yellow-400/15">
             <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-neutral-600 dark:text-neutral-400">
               {githubContent.currentStreak}
             </p>
-            <p className="mt-1 text-[18px] font-bold leading-none text-yellow-500">
-              {stats.isLoading ? "..." : `${stats.streak} ${githubContent.activeDays}`}
+            <p className="mt-1 text-[18px] font-bold leading-none text-hud">
+              {stats.isLoading ? "..." : `${streak} ${githubContent.activeDays}`}
             </p>
           </div>
         </div>
       </CardContent>
     </Card>
+    </HudFrame>
   );
 }

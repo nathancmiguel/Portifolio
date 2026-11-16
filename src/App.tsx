@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import './App.css'
 
 import Logs from './components/Logs'
+import InfinitLogs from './components/InfinitLogs'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
   return (
     <main className="container">
       <Hero />
+      <InfinitLogs />
       <Logs />
     </main>
   )

@@ -39,9 +39,20 @@
   --sidebar-accent-foreground: oklch(0.214 0.009 43.1);
   --sidebar-border: oklch(0.922 0.005 34.3);
   --sidebar-ring: oklch(0.714 0.014 41.2);
+
+  /* Tema claro "papel tecnico" */
+  --hud: oklch(0.5 0.13 62);
+  --hud-fill: var(--color-yellow-400);
+  --ink: oklch(0.2 0.01 60);
+  --paper: #f4f1e8;
+  --paper-card: #fffdf7;
 }
 
 .dark {
+  --hud: var(--color-yellow-500);
+  --hud-fill: var(--color-yellow-500);
+  --paper: oklch(0.147 0.004 49.3 / 0.4);
+  --paper-card: oklch(0.147 0.004 49.3 / 0.6);
   --background: oklch(0.147 0.004 49.3);
   --foreground: oklch(0.986 0.002 67.8);
   --card: oklch(0.214 0.009 43.1);
@@ -78,6 +89,11 @@
 @theme inline {
   --font-sans: 'Oxanium Variable', sans-serif;
   --font-heading: 'Manrope Variable', sans-serif;
+  --color-hud: var(--hud);
+  --color-hud-fill: var(--hud-fill);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-card: var(--paper-card);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -123,7 +139,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground bg-radial-[at_top] from-white dark:from-[color-mix(in_oklab,var(--color-yellow-500),black_78%)] to-neutral-200 dark:to-[color-mix(in_oklab,var(--color-yellow-500),black_90%)];
+    @apply bg-paper text-foreground bg-radial-[at_top] from-paper-card dark:from-[color-mix(in_oklab,var(--color-yellow-500),black_78%)] to-paper dark:to-[color-mix(in_oklab,var(--color-yellow-500),black_90%)];
     background-attachment: fixed;
   }
   button:not(:disabled), [role="button"]:not(:disabled) {
@@ -141,9 +157,9 @@
 
 .navbar-container {
   @apply fixed w-fit max-[375px]:w-[calc(100vw-32px)] top-4 max-[500px]:top-auto max-[500px]:bottom-6 z-50 flex gap-x-2 p-2
-  bg-white/80 dark:bg-black/80 backdrop-blur-2xl 
-  outline-1 outline-black/10 dark:outline-yellow-300/15
-  shadow-2xl shadow-black/30 dark:shadow-yellow-400/20;
+  bg-paper-card/90 dark:bg-black/80 backdrop-blur-2xl 
+  outline-1 outline-ink/80 dark:outline-yellow-300/15
+  shadow-[3px_3px_0_0_var(--ink)] dark:shadow-2xl dark:shadow-yellow-400/20;
 }
 
 .container {
@@ -155,7 +171,7 @@
 }
 
 .card-hero {
-  @apply w-full max-w-125 bg-neutral-100 dark:bg-transparent backdrop-blur-xl dark:outline dark:outline-yellow-500/10 shadow-xl dark:shadow-yellow-500/10;
+  @apply w-full dark:bg-transparent backdrop-blur-xl dark:outline dark:outline-yellow-500/10;
 }
 
 .react-activity-calendar__tooltip {
@@ -261,5 +277,200 @@
 }
 
 .github-calendar rect[data-level="0"] {
-  @apply fill-transparent! stroke-[1px]! stroke-black/20! dark:stroke-yellow-400/20!;
+  @apply fill-transparent! stroke-[1px]! stroke-ink/25! dark:stroke-yellow-400/20!;
+}
+/* ==========================================
+   HUD / system monitor
+   ========================================== */
+
+/* Grade sutil + ruido no fundo, com fade nas bordas */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  --grid-line: rgb(40 30 10 / 0.07);
+  --grid-major: rgb(40 30 10 / 0.12);
+  background-image:
+    linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 100%);
+}
+
+.dark body::before {
+  --grid-line: rgb(234 179 8 / 0.05);
+  --grid-major: rgb(234 179 8 / 0.05);
+  background-size: 32px 32px, 32px 32px, 32px 32px, 32px 32px;
+}
+
+body::after {
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark body::after {
+  opacity: 0.035;
+  mix-blend-mode: normal;
+}
+
+/* Card de "papel": borda de tinta + sombra solida (so no claro) */
+@layer components {
+  .paper-card {
+    @apply bg-paper-card ring-1 ring-ink/80 shadow-[4px_4px_0_0_var(--ink)] dark:bg-transparent dark:ring-foreground/10 dark:shadow-none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+}
+
+html:not(.dark) .hud-frame:hover > .paper-card {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+/* Blocos de linguagem um pouco mais densos no papel */
+html:not(.dark) .lang-block {
+  filter: saturate(1.15) brightness(0.92);
+}
+
+.mono-label {
+  @apply font-mono text-[12px] font-bold uppercase tracking-[0.2em] text-left;
+}
+
+/* Moldura com cantoneiras */
+.hud-frame {
+  position: relative;
+  --corner: 10px;
+  --corner-color: color-mix(in oklab, var(--ink) 70%, transparent);
+}
+
+.dark .hud-frame {
+  --corner-color: rgb(234 179 8 / 0.55);
+}
+
+.hud-corner {
+  position: absolute;
+  z-index: 1;
+  width: var(--corner);
+  height: var(--corner);
+  border-color: var(--corner-color);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hud-corner--tl { top: -4px; left: -4px; border-top-width: 1px; border-left-width: 1px; }
+.hud-corner--tr { top: -4px; right: -4px; border-top-width: 1px; border-right-width: 1px; }
+.hud-corner--bl { bottom: -4px; left: -4px; border-bottom-width: 1px; border-left-width: 1px; }
+.hud-corner--br { bottom: -4px; right: -4px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.hud-frame:hover .hud-corner { border-color: var(--hud); }
+.hud-frame:hover .hud-corner--tl { transform: translate(-2px, -2px); }
+.hud-frame:hover .hud-corner--tr { transform: translate(2px, -2px); }
+.hud-frame:hover .hud-corner--bl { transform: translate(-2px, 2px); }
+.hud-frame:hover .hud-corner--br { transform: translate(2px, 2px); }
+
+.hud-label {
+  position: absolute;
+  z-index: 1;
+  top: -0.6rem;
+  right: 1rem;
+  padding: 0 0.4rem;
+  @apply font-mono text-[9px] tracking-[0.2em] text-paper bg-ink dark:text-yellow-500/60 dark:bg-[color-mix(in_oklab,var(--color-yellow-500),black_88%)];
+}
+
+/* Scanlines muito leves, so no dark */
+.dark .hud-card {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.012) 0px,
+    rgb(255 255 255 / 0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Cursor de terminal piscando */
+.cursor-block {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Marquee do activity log */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee-mask:hover .marquee-track,
+.marquee-mask:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Reveal escalonado ao entrar na viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Blocos da barra de linguagem acendem em sequencia */
+.lang-block {
+  transition: opacity 0.25s ease;
+  transition-delay: calc(var(--i, 0) * 18ms + 200ms);
+}
+
+/* Boot do hero */
+.boot-line {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: type 0.9s steps(var(--chars, 12)) 0.2s forwards;
+}
+
+@keyframes type {
+  to { width: calc(var(--chars, 12) * 1ch); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee-mask { overflow-x: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .lang-block { transition: none; opacity: 1 !important; }
+  .boot-line { animation: none; width: auto; }
+  .cursor-block { animation: none; }
+  .hud-corner { transition: none; }
+  .paper-card { transition: none; }
+  html:not(.dark) .hud-frame:hover > .paper-card { transform: none; box-shadow: 4px 4px 0 0 var(--ink); }
 }
