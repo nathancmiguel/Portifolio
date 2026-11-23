@@ -20,6 +20,7 @@ const LANG_COLORS: Record<string, string> = {
 
 const FALLBACK = "#a3a3a3";
 
-export function langColor(language: string) {
-  return LANG_COLORS[language] ?? FALLBACK;
+/** Cor local (ajustada ao tema) > cor oficial do GitHub > cinza. */
+export function langColor(language: string, githubColor?: string | null) {
+  return LANG_COLORS[language] ?? githubColor ?? FALLBACK;
 }

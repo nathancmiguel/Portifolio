@@ -32,7 +32,7 @@ function toBlocks(shares: LanguageShare[]) {
       }
     });
 
-  return shares.flatMap((share, index) => Array(counts[index]).fill(share.name) as string[]);
+  return shares.flatMap((share, index) => Array<LanguageShare>(counts[index]).fill(share));
 }
 
 function LanguageBar({ shares, active }: { shares: LanguageShare[]; active: boolean }) {
@@ -43,13 +43,13 @@ function LanguageBar({ shares, active }: { shares: LanguageShare[]; active: bool
   return (
     <div className="flex flex-col gap-1.5 max-w-sm">
       <div className="flex gap-[2px]" aria-hidden>
-        {blocks.map((name, index) => (
+        {blocks.map((share, index) => (
           <span
             key={index}
             className="lang-block h-2 flex-1"
             style={
               {
-                backgroundColor: langColor(name),
+                backgroundColor: langColor(share.name, share.color),
                 "--i": index,
                 opacity: active ? 1 : 0,
               } as CSSProperties
@@ -60,7 +60,7 @@ function LanguageBar({ shares, active }: { shares: LanguageShare[]; active: bool
       <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-500 dark:text-neutral-400">
         {legend.map((share) => (
           <span key={share.name} className="flex items-center gap-1">
-            <span className="inline-block size-1.5" style={{ backgroundColor: langColor(share.name) }} />
+            <span className="inline-block size-1.5" style={{ backgroundColor: langColor(share.name, share.color) }} />
             {share.name} {Math.round(share.percent)}%
           </span>
         ))}
@@ -82,7 +82,8 @@ function RepoRow({
   const content = useIntlayer("pinned");
   const stars = useCountUp(repo.stars, active);
   const forks = useCountUp(repo.forks, active);
-  const primary = repo.languageShares[0]?.name ?? repo.languages[0] ?? "—";
+  const primaryShare = repo.languageShares[0];
+  const primary = primaryShare?.name ?? "—";
 
   return (
     <li className="reveal" style={{ "--i": index } as CSSProperties} data-visible={active}>
@@ -118,7 +119,7 @@ function RepoRow({
           </span>
 
           <span className="flex items-center gap-1.5 truncate text-neutral-600 dark:text-neutral-300">
-            <span className="inline-block size-2 shrink-0" style={{ backgroundColor: langColor(primary) }} />
+            <span className="inline-block size-2 shrink-0" style={{ backgroundColor: langColor(primary, primaryShare?.color) }} />
             <span className="truncate">{primary}</span>
           </span>
 
@@ -147,8 +148,13 @@ function RepoRow({
                 {repo.description || content.noDescription.value}
               </p>
               <p className="pt-1 font-mono text-[10px] text-neutral-400 dark:text-neutral-500">
-                {repo.commits} {content.commits.value}
-                {repo.home ? ` · ${repo.home.replace(/^https?:\/\//, "")}` : ""}
+                {[
+                  repo.commits !== null && `${repo.commits} ${content.commits.value}`,
+                  repo.homepage?.replace(/^https?:\/\//, ""),
+                  ...repo.topics.slice(0, 3).map((topic) => `#${topic}`),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
               </p>
             </div>
           </div>
@@ -230,7 +236,7 @@ export default function PinnedRepos() {
             {content.source}
           </span>
           <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-500">
-            api.kremilly.com
+            api.github.com/graphql
           </span>
         </CardFooter>
       </Card>

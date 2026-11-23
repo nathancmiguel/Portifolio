@@ -1,6 +1,11 @@
+import type { PinnedRepo } from "./pinned-types";
+
+export type { LanguageShare, PinnedRepo } from "./pinned-types";
+
 export const GITHUB_USER = "nathancmiguel";
 
-const PINNED_URL = `https://api.kremilly.com/github?user=${GITHUB_USER}`;
+// Funcao serverless (api/pinned.ts) que consulta o GitHub GraphQL com token
+const PINNED_URL = "/api/pinned";
 const GITHUB_API = "https://api.github.com";
 const CACHE_PREFIX = "gh-cache:";
 const DEFAULT_TTL = 60 * 60 * 1000; // 1h
@@ -8,33 +13,6 @@ const DEFAULT_TTL = 60 * 60 * 1000; // 1h
 // ==========================================
 // Tipos
 // ==========================================
-export type KremillyRepo = {
-  name: string;
-  description: string | null;
-  url: string;
-  home: string | null;
-  stars: number;
-  forks: number;
-  issues: number;
-  commits: number;
-  languages: string[];
-  tags: string[];
-};
-
-export type LanguageShare = {
-  name: string;
-  percent: number;
-};
-
-export type PinnedRepo = KremillyRepo & {
-  owner: string;
-  fullName: string;
-  isOrg: boolean;
-  languageShares: LanguageShare[];
-  /** ISO date do ultimo push, ou null se o enriquecimento falhar */
-  pushedAt: string | null;
-};
-
 export type ActivityEvent = {
   id: string;
   type: string;
@@ -107,63 +85,9 @@ export async function cachedFetch<T>(
 // ==========================================
 // Repos pinados
 // ==========================================
-function parseFullName(url: string) {
-  const [owner = "", name = ""] = new URL(url).pathname.split("/").filter(Boolean);
-  return { owner, fullName: `${owner}/${name}` };
-}
-
-function evenShares(languages: string[]): LanguageShare[] {
-  if (languages.length === 0) return [];
-  const percent = 100 / languages.length;
-  return languages.map((name) => ({ name, percent }));
-}
-
-function toShares(bytes: Record<string, number>): LanguageShare[] {
-  const total = Object.values(bytes).reduce((sum, value) => sum + value, 0);
-  if (total === 0) return [];
-  return Object.entries(bytes)
-    .map(([name, value]) => ({ name, percent: (value / total) * 100 }))
-    .sort((left, right) => right.percent - left.percent);
-}
-
-async function enrichRepo(repo: KremillyRepo, signal?: AbortSignal): Promise<PinnedRepo> {
-  const { owner, fullName } = parseFullName(repo.url);
-  const base: PinnedRepo = {
-    ...repo,
-    owner,
-    fullName,
-    isOrg: owner.toLowerCase() !== GITHUB_USER.toLowerCase(),
-    languageShares: evenShares(repo.languages),
-    pushedAt: null,
-  };
-
-  const [languages, meta] = await Promise.allSettled([
-    cachedFetch<Record<string, number>>(
-      `langs:${fullName}`,
-      `${GITHUB_API}/repos/${fullName}/languages`,
-      signal,
-    ),
-    cachedFetch<{ pushed_at: string }>(
-      `repo:${fullName}`,
-      `${GITHUB_API}/repos/${fullName}`,
-      signal,
-    ),
-  ]);
-
-  if (languages.status === "fulfilled") {
-    const shares = toShares(languages.value);
-    if (shares.length > 0) base.languageShares = shares;
-  }
-  if (meta.status === "fulfilled") {
-    base.pushedAt = meta.value.pushed_at ?? null;
-  }
-
-  return base;
-}
-
 export async function fetchPinnedRepos(signal?: AbortSignal): Promise<PinnedRepo[]> {
-  const repos = await cachedFetch<KremillyRepo[]>("pinned", PINNED_URL, signal);
-  return Promise.all(repos.map((repo) => enrichRepo(repo, signal)));
+  // A CDN ja cacheia por 1h; o localStorage evita ate a ida a CDN em visitas repetidas
+  return cachedFetch<PinnedRepo[]>("pinned:graphql", PINNED_URL, signal);
 }
 
 // ==========================================
